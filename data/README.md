@@ -1,12 +1,11 @@
 # Data Directory
 
-This directory contains the GrammarDB source files and generated database.
+This directory contains the GrammarDB database and split XML files.
 
 ## Files
 
-- `grammardb.xml` - Source XML file (included in repo)
-- `grammardb.sqlite` - Generated SQLite database (~650MB, not in repo)
-- `grammardb/*.xml` - Generated XML files by part of speech (not in repo)
+- `grammardb.sqlite` - SQLite database with 240,000+ Belarusian words (~650MB)
+- `grammardb/*.xml` - XML files split by part of speech
 
 ## Building the Database
 
