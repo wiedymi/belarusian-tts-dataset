@@ -1,0 +1,2 @@
+data/grammardb/*.xml filter=lfs diff=lfs merge=lfs -text
+data/grammardb.sqlite filter=lfs diff=lfs merge=lfs -text
