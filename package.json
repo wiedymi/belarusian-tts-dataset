@@ -1,0 +1,39 @@
+{
+  "name": "belarusian-tts-dataset",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Belarusian TTS dataset generator using Gemini AI",
+  "scripts": {
+    "generate": "bun run src/generate-dataset.ts",
+    "generate:openrouter": "bun run src/generate-dataset-openrouter.ts",
+    "validate": "bun run src/validate-dataset.ts",
+    "validate:deep": "bun run src/validate-dataset.ts --deep",
+    "validate:fix": "bun run src/validate-dataset.ts --deep --fix",
+    "validate:openrouter": "bun run src/validate-dataset-openrouter.ts",
+    "clean": "rm -rf output/*",
+    "build:db": "bun run src/build-grammardb.ts"
+  },
+  "dependencies": {
+    "@openrouter/ai-sdk-provider": "^0.7.3",
+    "ai": "^4.0.0",
+    "bun": "^1.2.19",
+    "fast-xml-parser": "^5.2.5",
+    "zod": "^4.0.14"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.19",
+    "boxen": "^8.0.1",
+    "chalk": "^5.4.1",
+    "ora": "^8.2.0"
+  },
+  "author": "wiedymi",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wiedymi/belarusian-tts-dataset"
+  },
+  "bugs": {
+    "url": "https://github.com/wiedymi/belarusian-tts-dataset/issues"
+  },
+  "homepage": "https://github.com/wiedymi/belarusian-tts-dataset"
+}

@@ -1,0 +1,11 @@
+# Bun configuration file
+
+[test]
+preload = ["./src/test-setup.ts"]
+
+[install]
+dev = true
+production = false
+
+[install.lockfile]
+save = true

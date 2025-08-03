@@ -1,0 +1,66 @@
+# Dependencies
+node_modules/
+.bun/
+
+# Output files
+output/
+test-output/
+production-output/
+output_batch*/
+
+# Audio recordings
+audio/
+recordings/
+*.wav
+*.mp3
+*.flac
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+bun-error.log*
+
+# Test coverage
+coverage/
+.coverage
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Backup files
+*.backup
+*.bak
+backup/
+
+# Cache
+.cache/
+*.cache
+
+# Build artifacts
+dist/
+build/
+
+# Custom configs
+config.local.ts
+*.local.json
