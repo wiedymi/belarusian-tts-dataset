@@ -91,9 +91,12 @@ curl -fsSL https://bun.sh/install | bash
 
 3. **Clone and install**:
 ```bash
-git clone https://github.com/yourusername/belarusian-tts-dataset.git
+git clone https://github.com/wiedymi/belarusian-tts-dataset.git
 cd belarusian-tts-dataset
 bun install
+
+# Build the accent database (required, ~650MB)
+bun run build:db
 ```
 
 ## 💻 Usage

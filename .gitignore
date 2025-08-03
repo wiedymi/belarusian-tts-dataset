@@ -61,6 +61,10 @@ backup/
 dist/
 build/
 
+# Large database files
+data/grammardb.sqlite
+data/grammardb/*.xml
+
 # Custom configs
 config.local.ts
 *.local.json
