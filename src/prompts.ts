@@ -196,7 +196,7 @@ Example format:
 
 IMPORTANT: Every line MUST start with [XXXXX] format. DO NOT OUTPUT PLAIN SENTENCES.
 
-BEGIN GENERATION:`;
+CRITICAL: Generate all ${batchSize} sentences in a single, uninterrupted response. Do not stop and do not ask to continue. The final output must contain the complete list from [${String(baseNum + 1).padStart(5, '0')}] to [${String(baseNum + batchSize).padStart(5, '0')}].`;
 }
 
 export function getSessionFocus(sessionNum: number): string {

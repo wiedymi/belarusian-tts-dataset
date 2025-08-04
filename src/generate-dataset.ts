@@ -378,13 +378,13 @@ class BelarusianDatasetGenerator {
         seenTexts.add(cleanText);
         
         // Parse emotion/action markers
-        const markerMatch = cleanText.match(/^\(([^)]+)\)\s+(.+)$/);
+        const markerMatch = cleanText.match(/^\(([^)]+)\)(?:\s+(.*))?$/);
         let sentenceText = cleanText;
         let marker = '';
         
         if (markerMatch) {
           marker = markerMatch[1];
-          sentenceText = markerMatch[2];
+          sentenceText = markerMatch[2] || ''; // Empty string for standalone markers
         }
         
         // Determine sentence type
@@ -512,7 +512,11 @@ class BelarusianDatasetGenerator {
         const prefix = s.emotionType ? `(${s.emotionType}) ` : 
                        s.sentenceType === 'whisper' ? `(${s.marker || 'шэпча'}) ` :
                        s.nonVerbalType ? `(${s.nonVerbalType}) ` : '';
-        return `[${s.id}] ${prefix}${s.text}\n         → ${s.accentedText}`;
+        // For standalone non-verbal sounds, show just the marker
+        const displayText = s.sentenceType === 'nonverbal' && s.text === '' 
+          ? `(${s.nonVerbalType})`
+          : `${prefix}${s.text}`;
+        return `[${s.id}] ${displayText}\n         → ${s.accentedText || displayText}`;
       })
       .join('\n');
     
@@ -530,7 +534,12 @@ class BelarusianDatasetGenerator {
                        s.sentenceType === 'whisper' ? `(${s.marker || 'шэпча'}) ` :
                        s.nonVerbalType ? `(${s.nonVerbalType}) ` : '';
         
-        return `${i + 1}\n${this.formatSRTTime(startTime)} --> ${this.formatSRTTime(endTime)}\n[${s.id}] ${prefix}${s.text}`;
+        // For standalone non-verbal sounds, show just the marker
+        const displayText = s.sentenceType === 'nonverbal' && s.text === '' 
+          ? `(${s.nonVerbalType})`
+          : `${prefix}${s.text}`;
+        
+        return `${i + 1}\n${this.formatSRTTime(startTime)} --> ${this.formatSRTTime(endTime)}\n[${s.id}] ${displayText}`;
       })
       .join('\n\n');
     

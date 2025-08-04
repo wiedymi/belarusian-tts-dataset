@@ -39,20 +39,15 @@ export async function callGeminiWithRetry(
   let lastError: unknown;
   
   for (let attempt = 1; attempt <= retryConfig.maxRetries; attempt++) {
-    let tempFile: string | null = null;
     try {
       // Suppress verbose logging to keep CLI clean
       // console.log(`      → Attempt ${attempt}/${retryConfig.maxRetries}`);
       
-      // Write prompt to temporary file to avoid shell escaping issues
-      tempFile = join(tmpdir(), `gemini-prompt-${Date.now()}.txt`);
-      await writeFile(tempFile, prompt);
-      
-      // Read file content and pass as prompt directly
-      const promptContent = await readFile(tempFile, 'utf-8');
+      // Convert prompt to single line by replacing newlines with spaces
+      const singleLinePrompt = prompt.replace(/\n+/g, ' ').trim();
       
       // Execute with timeout if specified - pass prompt directly to -p flag
-      const geminiPromise = $`gemini -m ${model} -p ${promptContent}`.text();
+      const geminiPromise = $`gemini -m ${model} -p ${singleLinePrompt}`.text();
       
       let result: string;
       if (retryConfig.timeoutMs) {
@@ -78,18 +73,11 @@ export async function callGeminiWithRetry(
         throw new Error('Response does not appear to contain formatted sentences');
       }
       
-      // Clean up temp file
-      await unlink(tempFile).catch(() => {}); // Ignore errors if file already deleted
-      
       // Suppress verbose logging to keep CLI clean
       // console.log(`      [OK] API call successful on attempt ${attempt}`);
       return result;
       
     } catch (error) {
-      // Clean up temp file on error
-      if (tempFile) {
-        await unlink(tempFile).catch(() => {});
-      }
       
       lastError = error;
       const errorMessage = error instanceof Error ? error.message : String(error);
